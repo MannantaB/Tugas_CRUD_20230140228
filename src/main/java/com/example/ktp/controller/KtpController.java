@@ -29,5 +29,10 @@ public class KtpController {
         return service.getAll();
     }
 
+    @GetMapping("/{id}")
+    public KtpEntity getById(@PathVariable Integer id) {
+        return service.getById(id);
+    }
+
 
 }
