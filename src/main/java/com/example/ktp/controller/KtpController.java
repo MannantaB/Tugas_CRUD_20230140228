@@ -1,9 +1,10 @@
 package com.example.ktp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/ktp")
@@ -13,4 +14,20 @@ public class KtpController {
 
     @Autowired
     private KtpService service;
+
+    @PostMapping
+    public ResponseEntity<?> create(@RequestBody KtpDto dto) {
+        try {
+            return ResponseEntity.ok(service.create(dto));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping
+    public List<KtpEntity> getAll() {
+        return service.getAll();
+    }
+
+
 }
